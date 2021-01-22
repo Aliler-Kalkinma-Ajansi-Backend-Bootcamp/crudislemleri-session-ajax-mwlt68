@@ -1,0 +1,23 @@
+﻿@model Data.Models.User;
+@{
+}
+
+<div class="div-center">
+    <h1>Sign Up</h1>
+    <form method="post" asp-controller="Home" asp-action="SignUp">
+        <div>
+            <input type="text" id="login" class="fadeIn second" asp-for="Username" placeholder="Username">
+            <span asp-validation-for="Username"
+                  class="text-muted"></span>
+        </div>
+        <div>
+            <input type="password" id="password" class="fadeIn third" asp-for="Password" placeholder="Password">
+            <span asp-validation-for="Password"
+                  class="text-muted"></span>
+            <a asp-controller="Home" asp-action="Index">
+                Login
+            </a>
+        </div>
+        <input type="submit" class="fadeIn fourth" value="Sign Up">
+    </form>
+</div>

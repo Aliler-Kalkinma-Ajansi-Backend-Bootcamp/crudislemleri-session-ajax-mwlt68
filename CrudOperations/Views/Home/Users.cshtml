@@ -1,0 +1,28 @@
+﻿@model List<Data.Models.User>
+@{
+}
+<div class="div-center">
+    <h1>User</h1>
+    <table>
+        <tr>
+            <th>User Name</th>
+            <th>Delete User</th>
+        </tr>
+        @foreach (var user in Model)
+        {
+            if (user != null)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>
+                        <form method="get" asp-controller="Home" asp-action="DeleteUser">
+                            <button name="deleteUserId" value=@user.Id>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+
+
+    </table>
+</div>
