@@ -15,7 +15,7 @@
                 <tr>
                     <td>@user.Username</td>
                     <td>
-                        <form method="get" asp-controller="Home" asp-action="DeleteUser">
+                        <form method="post" asp-controller="Home" asp-action="DeleteUser">
                             <button name="deleteUserId" value=@user.Id>Delete</button>
                         </form>
                     </td>

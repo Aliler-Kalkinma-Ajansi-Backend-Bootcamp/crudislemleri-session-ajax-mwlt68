@@ -35,21 +35,17 @@ namespace Data.DbContexts
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasMaxLength(24)
-                    .HasColumnName("password")
-                    .IsFixedLength(true);
+                    .HasMaxLength(50)
+                    .HasColumnName("password");
 
                 entity.Property(e => e.Username)
                     .IsRequired()
-                    .HasMaxLength(24)
-                    .HasColumnName("username")
-                    .IsFixedLength(true);
+                    .HasMaxLength(50)
+                    .HasColumnName("username");
             });
 
             OnModelCreatingPartial(modelBuilder);

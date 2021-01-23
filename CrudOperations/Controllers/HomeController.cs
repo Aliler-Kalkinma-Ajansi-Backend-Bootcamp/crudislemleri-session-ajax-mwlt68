@@ -102,22 +102,23 @@ namespace LayoutAndPartial.Controllers
         [HttpPost]
         public IActionResult DeleteUser(int deleteUserId)
         {
-            var users = userServices.GetUsers();
             var userId = HttpContext.Session.GetInt32(StaticDatas.UserIdSession);
             if (userId != null && userId > 0)
             {
-                bool  deleteResult= userServices.DeleteUserFromId(deleteUserId);
-                if (deleteResult && deleteUserId == userId)
+                User  deletedUser= userServices.DeleteUserFromId(deleteUserId);
+                if (deletedUser != null && deleteUserId == userId)
                 {
                     HttpContext.Session.Remove(StaticDatas.UserIdSession);
                     return View("~/Views/Home/Index.cshtml");
                 }
                 else
                 {
+                    var users = userServices.GetUsers();
                     return View("~/Views/Home/Users.cshtml", users);
                 }
             }
-            return View("~/Views/Home/Users.cshtml", users);
+            HttpContext.Session.Remove(StaticDatas.UserIdSession);
+            return View("~/Views/Home/Index.cshtml");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

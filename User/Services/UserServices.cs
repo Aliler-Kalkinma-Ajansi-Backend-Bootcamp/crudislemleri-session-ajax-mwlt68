@@ -41,20 +41,19 @@ namespace Data.Services
         }
         // This method  delete user password.
 
-        public bool DeleteUserFromId(int userId)
+        public User DeleteUserFromId(int userId)
         {
-            bool result = false;
+            User user = null;
             using (TestDbContext context = new TestDbContext())
             {
-                User user = GetUser(userId);
+                user = GetUser(userId);
                 if (user != null)
                 {
                     context.Users.Remove(user);
                     context.SaveChanges();
-                    result = true;
                 }
             }
-            return result;
+            return user;
         }
         // This method  change user data.
         public bool EditUser(User user)
@@ -91,7 +90,7 @@ namespace Data.Services
                 return null;
             using (TestDbContext context = new TestDbContext())
             {
-                user = context.Users.FirstOrDefault(x=>x.Id == x.Id);
+                user = context.Users.Where(x => x.Id == userId).FirstOrDefault();
             }   
             return user;
         }
