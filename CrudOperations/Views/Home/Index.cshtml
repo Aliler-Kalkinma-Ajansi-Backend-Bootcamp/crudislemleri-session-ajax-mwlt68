@@ -2,22 +2,67 @@
 @{
 }
 
-    <div class="div-center">
-        <h1>Login</h1>
-        <form method="post" asp-controller="Home" asp-action="Login">
-            <div>
-                <input type="text" id="login" class="fadeIn second" asp-for="Username" placeholder="Username">
-                <span asp-validation-for="Username"
-                      class="text-muted"></span>
+    <script>
+
+        function myFunction() {
+        $.ajax({
+            type: "POST",
+            url: "/Home/Login",
+            data: {
+                "username": $("#userid").val(),
+                "password": $("#password").val()
+            },
+
+            success: function (result) {
+                if (result.Success) {
+                    window.location.href = "@Url.Action("Users", "Home")";
+                     }
+                    else
+                        window.location.href = "@Url.Action("Index", "Home")";
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+            }
+        });
+    }
+    </script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6col-md-offset-3">
+            <h2 class="text-center">Login to Your Account</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphiconglyphicon-user"></i></span>
+                            <input type="text" id="userid" class="form-control" placeholder="Username">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <input type="password" id="password" class="fadeIn third" asp-for="Password" placeholder="Password">
-                <span asp-validation-for="Password"
-                      class="text-muted"></span>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphiconglyphicon-lock"></i></span>
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button class="btn btn-warning form-control" type="submit" onclick="myFunction()"><i class="glyphiconglyphicon-log-in"></i>&nbsp;Login</button>
+                    </div>
+                </div>
                 <a asp-controller="Home" asp-action="SignUp">
                     SignUp
                 </a>
             </div>
-            <input type="submit" class="fadeIn fourth" value="Log In">
-        </form>
+        </div>
     </div>
+</div>
+
+
+

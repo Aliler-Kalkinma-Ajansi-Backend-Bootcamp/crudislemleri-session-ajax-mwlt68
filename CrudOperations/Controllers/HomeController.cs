@@ -32,18 +32,20 @@ namespace LayoutAndPartial.Controllers
             }
             return View();
         }
-
         [HttpPost]
-        public IActionResult Login(User user)
+        public JsonResult Login(string username, string password)
         {
-            int userId=userServices.Login(user);
+            int userId = userServices.Login(new Data.Models.User() {  Username=username,Password=password});
             if (userId > 0)
             {
                 HttpContext.Session.SetInt32(StaticDatas.UserIdSession, userId);
-                var users = userServices.GetUsers();
-                return View("~/Views/Home/Users.cshtml",users);
+                return Json(new { Success = true });
             }
-            return View("~/Views/Home/Index.cshtml");
+            else
+            {
+                return Json(new { Success = false ,Message="User can not find !"});
+            }
+                
         }
         public IActionResult SignUp()
         {
